@@ -7,7 +7,7 @@ export default function BlogGrid() {
     <article className="relative max-w-7xl mx-auto">
       <section className="text-center">
         <h2 className="text-3xl tracking-tight font-extrabold text-white sm:text-4xl">
-          Edgy Blog
+          NewSocial Blog
         </h2>
         <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
           Expand your brand's reach and get more followers with these tried and

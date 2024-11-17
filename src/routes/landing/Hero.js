@@ -1,128 +1,158 @@
-import { Link } from 'react-router-dom'
-import InstagramCover from '../../assets/images/instagram-icon-cover.png'
-import { useState } from 'react'
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
-  const [formValue, setFormValue] = useState({ email: '' });
-  const [formError, setFormError] = useState({});
-  const [submit, setSubmit] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [slideIndex, setSlideIndex] = useState(0);
 
-  const ResetLocation = () => window.scrollTo(0, 0);
+  // Auto-sliding functionality
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSlideIndex((prev) => (prev + 1) % 4);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setFormError(validateForm(formValue))
-    if (Object.keys(validateForm(formValue)).length > 0) {
-      setLoading(false);
-      return null;
-    }
-    else {
-      setSubmit(true);
-      setFormValue({ email: '' });
-      setLoading(false);
-    }
-  }
-  const handleValidation = (e) => {
-    const { name, value } = e.target;
-    setFormValue({ ...formValue, [name]: value });
-  }
-
-  const validateForm = (value) => {
-    const errors = {};
-    const emailValidation = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
-    if (!value.email) {
-      errors.email = "Empty email field"
-    }
-    else if (!emailValidation.test(value.email)) {
-      errors.email = "Invalid email format"
-    }
-    return errors;
-  }
   return (
+    <div className="w-full bg-white">
+      {/* Main Hero Section */}
+      <section className="max-w-7xl mx-auto px-4 pt-20 pb-16">
+        <div className="text-center mb-20">
+          <div className="flex justify-center items-center flex-wrap text-6xl font-bold text-indigo-950 leading-tight">
+            <span>CONNECT</span>
+            <div className="mx-4 w-16 h-16 rounded-full bg-pink-200 overflow-hidden transform hover:scale-105 transition-transform">
+              <img src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" alt="profile" className="w-full h-full object-cover" />
+            </div>
+            <span>CREATE</span>
+          </div>
 
-    <article className="pt-10 bg-gray-900 sm:pt-16 lg:pt-8 lg:pb-14 lg:overflow-hidden" >
-      <section className="mx-auto max-w-7xl lg:px-8">
-        <section className="lg:grid lg:grid-cols-2 lg:gap-8">
-          {/* CONTENT SECTION */}
-          <section className="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center">
-            <section className="lg:py-24">
-              <h1 className="mt-4 text-5xl tracking-tight font-extrabold text-white sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl">
-                <span className="block">Edgy</span>
-                <span className="block text-[color:var(--primary-font-color)]">
-                  your Instagram growth secret
-                </span>
-              </h1>
-              <p className="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                Boost your popularity on Instagram with our premium package that
-                will skyrocket your profile engagement!
-              </p>
-              <section className="mt-10 sm:mt-12">
-                {loading ?
-                  <React.Fragment>
-                    <div role="status">
-                      <svg aria-hidden="true" className="w-10 h-10 mt-6 text-gray-200 animate-spin dark:text-gray-600 fill-indigo-400" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg" >
-                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
-                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
-                      </svg>
-                      <span className="sr-only">Loading...</span>
-                    </div>
-                  </React.Fragment>
-                  :
-                  submit && Object.keys(formError).length === 0 ?
-                    <p className='font-medium text-green-600 sm:text-xl lg:text-lg xl:text-xl'>Hold tight! Our representative will contact you shortly via email</p> :
-                    <form onSubmit={handleSubmit} className="sm:max-w-xl sm:mx-auto lg:mx-0">
-                      <section className="sm:flex">
-                        <section className="min-w-0 flex-1">
-                          <label htmlFor="email" className="sr-only">
-                            Email address
-                          </label>
-                          <input
-                            id="trial-email"
-                            name="email"
-                            type="text"
-                            value={formValue.email}
-                            onChange={handleValidation}
-                            placeholder="Enter your email"
-                            className="block w-full px-4 py-3 rounded-md border-0 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900"
-                          />
-                          <span className="text-red-400 mt-6">{formError.email}</span>
-                        </section>
-                        <section className="mt-3 sm:mt-0 sm:ml-3">
-                          <button
-                            type="submit"
-                            className="mt-3 sm:mt-0 sm:ml-3 block w-full py-3 px-4 rounded-md shadow bg-indigo-500 text-white font-medium hover:bg-indigo-600 focus:outline-none focus:ring-2  focus:ring-offset-gray-900"
-                          >
-                            Start free trial
-                          </button>
-                        </section>
-                      </section>
-                      <p className="mt-3 text-sm text-gray-300 sm:mt-4">
-                        Start your free 14-day trial, no credit card necessary. By
-                        providing your email, you agree to our
-                        <Link
-                          to="/terms"
-                          className="font-medium text-white"
-                          onClick={ResetLocation}> terms of service</Link>.
-                      </p>
-                    </form>
-                }
-              </section>
-            </section>
-          </section>
-          {/* IMAGE SECTION */}
-          <section className="mt-12 -mb-16 md:-mb-48 lg:m-0 lg:relative">
-            <img
-              className="w-full lg:inset-y-0 lg:left-0 lg:w-90 lg:max-w-none opacity-60 object-cover"
-              src={InstagramCover}
-              alt=""
-              aria-hidden="true"
-            />
-          </section>
+          <div className="flex justify-center items-center flex-wrap text-6xl font-bold text-indigo-950 leading-tight mt-4">
+            <span>AUGMENT</span>
+            <div className="mx-4 w-16 h-16 rounded-full bg-green-200 overflow-hidden transform hover:scale-105 transition-transform">
+              <img src="https://images.unsplash.com/photo-1577880216142-8549e9488dad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" alt="profile" className="w-full h-full object-cover" />
+            </div>
+            <span>YOUR</span>
+          </div>
+
+          <div className="flex justify-center items-center flex-wrap text-6xl font-bold text-indigo-950 leading-tight mt-4">
+            <span>REALITY</span>
+            <div className="ml-4 w-16 h-16 rounded-full bg-purple-200 overflow-hidden transform hover:scale-105 transition-transform">
+              <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" alt="profile" className="w-full h-full object-cover" />
+            </div>
+          </div>
+
+          <div className="mt-8 text-3xl text-pink-400 italic">
+            (Download now ↓)
+          </div>
+        </div>
+
+        {/* Sliding Cards Section with Custom Shapes */}
+        <div className="relative overflow-hidden">
+          <div
+            className="flex space-x-6 transition-transform duration-500 ease-in-out"
+            style={{ transform: `translateX(-${slideIndex * 25}%)` }}
+          >
+            {/* About Card */}
+            <div className="flex-none w-72">
+              <Link to="/about" className="block bg-gray-50 rounded-3xl p-8 h-full hover:shadow-lg transition-all">
+                <p className="text-xs uppercase tracking-wide text-gray-500 mb-2">DISCOVER OUR HISTORY</p>
+                <h3 className="text-2xl font-bold text-indigo-950">
+                  About
+                  <br />
+                  CircleUp
+                </h3>
+                <div className="absolute top-4 right-4">
+                  <svg className="w-6 h-6 text-gray-400" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </div>
+              </Link>
+            </div>
+
+            {/* Feature Set Card - Blob Shape */}
+            <div className="flex-none w-72">
+              <div className="bg-indigo-950 rounded-[60px] p-8 h-full text-white relative overflow-hidden">
+                <div className="absolute inset-0 bg-indigo-900 opacity-50 blob-shape"></div>
+                <div className="relative z-10">
+                  <div className="flex justify-center mb-4">
+                    <svg className="w-8 h-8" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold text-center">
+                    View
+                    <br />
+                    feature set
+                  </h3>
+                </div>
+              </div>
+            </div>
+
+            {/* How it Works Card */}
+            <div className="flex-none w-96">
+              <Link to="/how-it-works" className="block bg-indigo-100 rounded-3xl p-8 h-full hover:shadow-lg transition-all">
+                <p className="text-xs uppercase tracking-wide text-indigo-600 mb-2">EXPLORE POSSIBILITIES</p>
+                <h3 className="text-2xl font-bold text-indigo-950">
+                  How it works
+                </h3>
+              </Link>
+            </div>
+
+            {/* Blog Card */}
+            <div className="flex-none w-72">
+              <Link to="/blog" className="block bg-orange-500 rounded-3xl p-8 h-full hover:shadow-lg transition-all">
+                <h3 className="text-2xl font-bold text-white">
+                  Our blog
+                </h3>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* How it Works Section */}
+        <section className="mt-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-indigo-950 rounded-3xl p-8 text-white">
+              <h3 className="text-2xl mb-6">What do you want to add?</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-white/10 rounded-xl p-4">
+                  <span className="text-lg">My bio</span>
+                </div>
+                <div className="bg-white/10 rounded-xl p-4">
+                  <span className="text-lg">Choose interests</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <div className="bg-gray-50 rounded-3xl p-8">
+                <h3 className="text-2xl font-bold text-indigo-950">Create an account</h3>
+                <p className="text-gray-600 mt-4">
+                  To fully utilize the social networking aspects, create an account on the app.
+                </p>
+                <button className="mt-4 inline-flex items-center text-indigo-950 font-medium">
+                  WATCH VIDEO TUTORIAL
+                  <svg className="w-5 h-5 ml-2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                  </svg>
+                </button>
+              </div>
+
+              <div className="bg-pink-100 rounded-3xl p-8">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <p className="text-2xl font-bold text-indigo-950">It's completely new feelings</p>
+                    <p className="text-gray-600 mt-2">— Lisa Johnson</p>
+                    <p className="text-indigo-400 text-sm">Influencer</p>
+                  </div>
+                  <div className="w-16 h-16 rounded-full overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80" alt="testimonial" className="w-full h-full object-cover" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
       </section>
-    </article>
-  )
+    </div>
+  );
 }

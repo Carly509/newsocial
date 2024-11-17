@@ -115,7 +115,7 @@ export default function Testimonials() {
                       Catherine Black
                     </section>
                     <section className="text-base font-medium text-[color:var(--primary-font-color)]">
-                      CEO, Edgy
+                      CEO, NewSocial
                     </section>
                   </section>
                 </section>

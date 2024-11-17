@@ -1,74 +1,106 @@
-import EdgyIcon from "../../assets/images/edgy-icon.png";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-const links = [
-  { name: "About", href: "/about" },
-  { name: "Pricing", href: "/pricing" },
-  { name: "Blog", href: "/blog" },
-  { name: "FAQ", href: "/faq" },
-  { name: "Contact", href: "/contact" },
-];
+const Navigation = ({ loggedIn, setLoggedIn, setTriggeredLogout }) => {
+  const navigate = useNavigate();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-export default function Navigation({ loggedIn, setLoggedIn, setTriggeredLogout }) {
-  const navigate = useNavigate()
-  const ResetLocation = () => window.scrollTo(0, 0);
   const logOutUser = () => {
     setTriggeredLogout(true);
     setLoggedIn(false);
-    navigate('/')
-  }
+    navigate('/');
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   return (
-    <header className="bg-gray-900">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
-        <section className="w-full py-6 flex items-center justify-between border-b border-indigo-500 lg:border-none">
-          <section className="flex items-center">
-            <Link to="/" onClick={ResetLocation}>
-              <span className="sr-only">Edgy</span>
-              <img className="h-10 w-auto" src={EdgyIcon} alt="Edgy" />
-            </Link>
-            <section className="hidden ml-10 space-x-8 lg:block">
-              {links.map((link) => (
-                <Link
-                  onClick={ResetLocation}
-                  key={link.name}
-                  to={link.href}
-                  className="text-base font-medium text-white hover:text-indigo-50"
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </section>
-          </section>
-          {loggedIn ? <section className="ml-10 space-x-4">
-            <button onClick={() => { logOutUser() }} className="inline-block bg-indigo-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75">
-              Sign out
-            </button>
-            <Link onClick={ResetLocation} to="/profile" className="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-indigo-600 hover:bg-indigo-50">
-              Profile
-            </Link>
-          </section> :
-            <section className="ml-10 space-x-4">
-              <Link onClick={ResetLocation} to="/sign-in" className="inline-block bg-indigo-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75">
-                Sign in
-              </Link>
-              <Link onClick={ResetLocation} to="/sign-up" className="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-indigo-600 hover:bg-indigo-50">
-                Sign up
-              </Link>
-            </section>}
-        </section>
-        <section className="py-4 flex flex-wrap justify-center space-x-6 lg:hidden">
-          {links.map((link) => (
-            <Link
-              onClick={ResetLocation}
-              key={link.name}
-              to={link.href}
-              className="text-base font-medium text-white hover:text-indigo-50"
+    <nav className="w-full px-4 py-4 bg-white border-b border-gray-100">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="flex items-center">
+          <div className="bg-green-100 px-4 py-2 rounded-lg">
+            <span className="text-gray-900 font-semibold text-xl">NewSocial</span>
+          </div>
+        </Link>
+
+        {/* Navigation Links */}
+        <div className="hidden md:flex items-center space-x-8">
+          <div className="relative group">
+            <button
+              onClick={toggleDropdown}
+              className="text-gray-600 hover:text-gray-900 font-medium flex items-center"
             >
-              {link.name}
-            </Link>
-          ))}
-        </section>
-      </nav>
-    </header>
+              FEATURES
+              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {isDropdownOpen && (
+              <div className="absolute right-0 z-10 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg">
+                <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                  <Link to="/feature1" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                    Feature 1
+                  </Link>
+                  <Link to="/feature2" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                    Feature 2
+                  </Link>
+                  <Link to="/feature3" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                    Feature 3
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
+          <Link to="/privacy" className="text-gray-600 hover:text-gray-900 font-medium">
+            PRIVACY
+          </Link>
+          <Link to="/help" className="text-gray-600 hover:text-gray-900 font-medium">
+            HELP CENTRE
+          </Link>
+          <Link to="/blog" className="text-gray-600 hover:text-gray-900 font-medium">
+            BLOG
+          </Link>
+        </div>
+
+        {/* Auth Buttons */}
+        <div className="flex items-center space-x-4">
+          {loggedIn ? (
+            <>
+              <button
+                onClick={logOutUser}
+                className="text-gray-600 hover:text-gray-900 font-medium"
+              >
+                LOG OUT
+              </button>
+              <Link
+                to="/profile"
+                className="bg-indigo-900 text-white px-6 py-2 rounded-lg font-medium hover:bg-indigo-800 transition-colors"
+              >
+                PROFILE
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/sign-in"
+                className="text-gray-600 hover:text-gray-900 font-medium"
+              >
+                LOG IN
+              </Link>
+              <Link
+                to="/sign-up"
+                className="bg-indigo-900 text-white px-6 py-2 rounded-lg font-medium hover:bg-indigo-800 transition-colors"
+              >
+                SIGN UP
+              </Link>
+            </>
+          )}
+        </div>
+      </div>
+    </nav>
   );
-}
+};
+
+export default Navigation;

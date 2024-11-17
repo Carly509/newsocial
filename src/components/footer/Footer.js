@@ -7,7 +7,7 @@ const navigation = {
   solutions: [
     { name: "+1 202 555 0186", href: "tel:+1-202-555-0186" },
     { name: "+44 1632 960362", href: "tel:+44-1632-960362" },
-    { name: "support@edgy.com", href: "mailto:support@edgy.com" },
+    { name: "support@newsocial.com", href: "mailto:support@newsocial.com" },
   ],
   support: [
     { name: "Pricing", href: "/pricing" },
@@ -27,7 +27,7 @@ const navigation = {
   social: [
     {
       name: "Github",
-      href: "https://github.com/catherineisonline/edgy",
+      href: "https://github.com/catherineisonline/newsocial",
       icon: Github
     },
     {
@@ -149,7 +149,7 @@ export default function Footer() {
             ))}
           </section>
           <p className="mt-8 text-base text-gray-400 md:mt-0 md:order-1">
-            &copy; <span>{new Date().getFullYear()}</span> Edgy, Inc. All rights reserved.
+            &copy; <span>{new Date().getFullYear()}</span> newsocial, Inc. All rights reserved.
           </p>
         </section>
       </section>

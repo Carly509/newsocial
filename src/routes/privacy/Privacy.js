@@ -111,10 +111,10 @@ export default function Privacy() {
               Legal
             </span>
             <span className="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
-              Edgy Privacy Policy
+              NewSocial Privacy Policy
             </span>
           </h2>
-          <p className="mt-8 text-lg text-gray-500">This Privacy Policy ("Policy") outlines how Edgy ("Edgy," "we," "our," or "us") collects, uses, and protects your personal information when you use our Instagram growth services. By using our services, you ("you," "your," or "user") consent to the practices described in this Policy.</p>
+          <p className="mt-8 text-lg text-gray-500">This Privacy Policy ("Policy") outlines how NewSocial ("NewSocial," "we," "our," or "us") collects, uses, and protects your personal information when you use our Instagram growth services. By using our services, you ("you," "your," or "user") consent to the practices described in this Policy.</p>
           <h3 className="text-lg text-gray-500">1. Information We Collect:</h3>
           <p className="text-lg text-gray-500">We may collect the following types of information when you use our services:</p>
           <ul className="text-lg text-gray-500">
@@ -140,8 +140,8 @@ export default function Privacy() {
           <h3 className="text-lg text-gray-500">6. Changes to the Privacy Policy:</h3>
           <p className="text-lg text-gray-500">We may update this Privacy Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. We will notify you of any material changes through the email associated with your account or by posting a prominent notice on our website. Your continued use of our services after such changes constitutes your acceptance of the revised Privacy Policy.</p>
           <h3 className="text-lg text-gray-500">7. Contact Us:</h3>
-          <p className="text-lg text-gray-500">If you have any questions or concerns regarding this Privacy Policy or our services, please contact us at support@edgy.com.</p>
-          <p className="text-lg text-gray-500">By using Edgy's services, you acknowledge that you have read, understood, and agree to this Privacy Policy.</p>
+          <p className="text-lg text-gray-500">If you have any questions or concerns regarding this Privacy Policy or our services, please contact us at support@newsocial.com.</p>
+          <p className="text-lg text-gray-500">By using NewSocial's services, you acknowledge that you have read, understood, and agree to this Privacy Policy.</p>
         </section>
       </section>
     </main>

@@ -9,7 +9,7 @@ export default function JobsListing() {
             Jobs
           </h2>
           <p className="text-xl text-gray-500">
-            Edgy is the global leader in social media management. We power
+            NewSocial is the global leader in social media management. We power
             social media for brands and organizations around the world, from the
             smallest businesses to the largest enterprises. Our unparalleled
             expertise in social media management, social insights, employee

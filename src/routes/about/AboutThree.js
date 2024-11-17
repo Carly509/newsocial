@@ -22,7 +22,7 @@ export default function AboutThree() {
               Let's work together
             </h3>
             <p className="mt-8 text-lg text-gray-500">
-              In the fast-paced world of social media, collaboration is the catalyst that ignites exponential growth and propels businesses to new heights. At Edgy, we firmly believe that forging meaningful partnerships can unlock unexplored opportunities and expand your reach like never before. In this article, we invite you to embrace the power of collaboration as we work together with other businesses to elevate your Instagram growth and unleash the full potential of your brand.
+              In the fast-paced world of social media, collaboration is the catalyst that ignites exponential growth and propels businesses to new heights. At NewSocial, we firmly believe that forging meaningful partnerships can unlock unexplored opportunities and expand your reach like never before. In this article, we invite you to embrace the power of collaboration as we work together with other businesses to elevate your Instagram growth and unleash the full potential of your brand.
             </p>
             <section className="mt-5 prose prose-indigo text-gray-500">
               <p className="mt-8 text-lg text-gray-500">
